@@ -76,10 +76,17 @@ function ShowCompare() {
 
     UpdateCompareTable();
     document.getElementById("compare").style.display = "block";
+    document.body.classList.add("compare-open")
+}
+function HideCompare() {
+    document.getElementById("compare").style.display = "none";
+    document.body.classList.remove("compare-open");
+
 }
 
 function HideCompare(){
     document.getElementById("compare").style.display = "none"; 
+    document.body.classList.remove("compare-open");
 }
 
 function UpdateCompareTable() {
@@ -99,7 +106,9 @@ function UpdateCompareTable() {
         document.getElementById(`compare_volumecacamba_${i}`).textContent = car.volumeCacamba
         document.getElementById(`compare_roda_${i}`).textContent = car.roda
         document.getElementById(`compare_preco_${i}`).textContent = `R$ ${car.preco.toLocaleString('pt-BR')}`
-    
     }
+    document.addEventListener('DOMContentLoaded', function(){
+        botaoComparar();
+    })
 
 }
