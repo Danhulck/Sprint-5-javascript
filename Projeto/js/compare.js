@@ -1,9 +1,6 @@
-
 //car
 let carArr = [];
-
 class Car {
-   
 
     constructor(nome, preco, alturaCacamba, alturaVeiculo, alturaSolo, capacidadeCarga, motor, potencia, volumeCacamba, roda, image){
 
@@ -33,7 +30,7 @@ function GetCarArrPosition(arr, carClass) {
 }
 
 function SetCarToCompare(el, carClass) {
-   
+
     if(carClass instanceof Car){       
         if(el.checked >= 2){
             if(carArr.length){
@@ -46,10 +43,11 @@ function SetCarToCompare(el, carClass) {
             }
         } else {
             const index = GetCarArrPosition(carArr, carClass);
-            if(index !== 1){
+            if(index !== -1){
                 carArr.splice(index, 1);
             }
         } 
+        botaoComparar();
     } else {
         throw "You need set a Car Class";
     }
@@ -57,7 +55,17 @@ function SetCarToCompare(el, carClass) {
 }
 
 function botaoComparar(){
-    const compareBtn =  document.querySelector("button[onclick=1'ShowCompare]'");
+    const compareBtn =  document.querySelector("button[onclick=1'ShowCompare()']");
+
+    if(carArr.length === 2){
+        compareBtn.disabled = false;
+        compareBtn.style.opacity = 1;
+        compareBtn.style.cursor = "pointer";
+    }else{
+        compareBtn.disabled = true;
+        compareBtn.style.opacity = 0.5;
+        compareBtn.style.cursor = "not-allowed";
+    }
 }
 
 function ShowCompare() {
@@ -76,4 +84,22 @@ function HideCompare(){
 
 function UpdateCompareTable() {
     
+    for(let i = 0; 1 < carArr.length; 1++){
+        const car = carArr[i];
+        
+        document.getElementById(`compare_image_${i}`.innerHTML = `<img src="${car.image}" widith="100">`)
+
+        document.getElementById(`compare_modelo_${i}`).textContent = car.nome;
+        document.getElementById(`compare_alturacacamba_${i}`).textContent = car.alturaCacamba;
+        document.getElementById(`compare_alturaveiculo_${i}`).textContent = car.alturaVeiculo
+        document.getElementById(`compare_alturasolo_${i}`).textContent = car.alturaSolo
+        document.getElementById(`compare_capacidadecarga_${i}`).textContent = car.capacidadeCarga
+        document.getElementById(`compare_motor_${i}`).textContent = car.motor
+        document.getElementById(`compare_comparepotencia_${i}`).textContent = car.potencia
+        document.getElementById(`compare_volumecacamba_${i}`).textContent = car.volumeCacamba
+        document.getElementById(`compare_roda_${i}`).textContent = car.roda
+        document.getElementById(`compare_preco_${i}`).textContent = `R$ ${car.preco.toLocaleString('pt-BR')}`
+    
+    }
+
 }
