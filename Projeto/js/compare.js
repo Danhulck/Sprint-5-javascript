@@ -35,10 +35,10 @@ function GetCarArrPosition(arr, carClass) {
 function SetCarToCompare(el, carClass) {
    
     if(carClass instanceof Car){       
-        if(el.checked){
+        if(el.checked >= 2){
             if(carArr.length){
                 el.checked = false;
-                alert("Você só pode comprar 2 veículos por vez!")
+                alert("Você só pode comprar 2 veículos por vez!");
                 return;
             }
             if(GetCarArrPosition(carArr, carClass) === -1){
